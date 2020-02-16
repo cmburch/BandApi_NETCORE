@@ -16,5 +16,9 @@
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="DbContexts\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
   </ItemGroup>
 </Project>
