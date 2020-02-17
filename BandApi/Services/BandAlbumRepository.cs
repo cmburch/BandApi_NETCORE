@@ -82,7 +82,11 @@ namespace BandApi.Services
 
         public IEnumerable<Album> GetAlbums(Guid bandId)
         {
-            throw new NotImplementedException();
+            if (bandId == Guid.Empty)
+                throw new ArgumentNullException(nameof(bandId));
+
+            return _context.Albums.Where(a => a.BandId == bandId)
+                .OrderBy(a => a.Title).ToList();
         }
 
         public Band GetBand(Guid bandId)
