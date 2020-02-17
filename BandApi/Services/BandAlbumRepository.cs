@@ -71,7 +71,13 @@ namespace BandApi.Services
 
         public Album GetAlbum(Guid bandId, Guid albumId)
         {
-            throw new NotImplementedException();
+            if (bandId == Guid.Empty)
+                throw new ArgumentNullException(nameof(bandId));
+
+            if (albumId == Guid.Empty)
+                throw new ArgumentNullException(nameof(albumId));
+
+            return _context.Albums.Where(a => a.BandId == bandId && a.Id == albumId).FirstOrDefault();
         }
 
         public IEnumerable<Album> GetAlbums(Guid bandId)
