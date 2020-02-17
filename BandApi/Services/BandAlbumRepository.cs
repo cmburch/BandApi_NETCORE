@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BandApi.DbContexts;
 using BandApi.Entities;
 
@@ -29,12 +30,18 @@ namespace BandApi.Services
 
         public void AddBand(Band band)
         {
-            throw new NotImplementedException();
+            if (band == null)
+                throw new ArgumentNullException(nameof(band));
+
+            _context.Bands.Add(band);
         }
 
         public bool AlbumExists(Guid albumId)
         {
-            throw new NotImplementedException();
+            if (albumId == Guid.Empty)
+                throw new ArgumentNullException(nameof(albumId));
+
+            return _context.Albums.Any(a => a.Id == albumId);//compare the passed in albumId to Albums Id in the context
         }
 
         public bool BandExists(Guid bandId)
