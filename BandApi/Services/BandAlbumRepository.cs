@@ -91,12 +91,15 @@ namespace BandApi.Services
 
         public Band GetBand(Guid bandId)
         {
-            throw new NotImplementedException();
+            if (bandId == Guid.Empty)
+                throw new ArgumentNullException(nameof(bandId));
+
+            return _context.Bands.FirstOrDefault(b => b.Id == bandId);
         }
 
         public IEnumerable<Band> GetBands()
         {
-            throw new NotImplementedException();
+            return _context.Bands.ToList();
         }
 
         public IEnumerable<Band> GetBands(IEnumerable<Guid> bandIds)
