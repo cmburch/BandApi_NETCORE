@@ -46,7 +46,11 @@ namespace BandApi.Services
 
         public bool BandExists(Guid bandId)
         {
-            throw new NotImplementedException();
+            if(bandId == Guid.Empty)
+                throw new ArgumentNullException(nameof(bandId));
+
+            return _context.Bands.Any(b => b.Id == bandId);
+
         }
 
         public void DeleteAlbum(Album album)
