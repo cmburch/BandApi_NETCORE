@@ -104,12 +104,16 @@ namespace BandApi.Services
 
         public IEnumerable<Band> GetBands(IEnumerable<Guid> bandIds)
         {
-            throw new NotImplementedException();
+            if (bandIds == null)
+                throw new ArgumentNullException(nameof(bandIds));
+
+            return _context.Bands.Where(b => bandIds.Contains(b.Id))
+                .OrderBy(b => b.Name).ToList();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0); // SaveChanges return an integer of save records and -1 if save failed
         }
 
         public void UpdateAlbum(Album album)
