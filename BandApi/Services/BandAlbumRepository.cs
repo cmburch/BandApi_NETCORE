@@ -55,12 +55,18 @@ namespace BandApi.Services
 
         public void DeleteAlbum(Album album)
         {
-            throw new NotImplementedException();
+            if(album == null)
+                throw new ArgumentNullException(nameof(album));
+
+            _context.Albums.Remove(album);
         }
 
         public void DeleteBand(Band band)
         {
-            throw new NotImplementedException();
+            if (band == null)
+                throw new ArgumentNullException(nameof(band));
+
+            _context.Bands.Remove(band);
         }
 
         public Album GetAlbum(Guid bandId, Guid albumId)
