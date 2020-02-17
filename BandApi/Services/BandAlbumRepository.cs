@@ -17,7 +17,14 @@ namespace BandApi.Services
 
         public void AddAlbum(Guid bandId, Album album)
         {
-            throw new NotImplementedException();
+            if (bandId == Guid.Empty)
+                throw new ArgumentNullException(nameof(bandId));
+
+            if (album == null)
+                throw new ArgumentNullException(nameof(album));
+
+            album.BandId = bandId; //associate the album to a band
+            _context.Albums.Add(album); // Add the album to the context
         }
 
         public void AddBand(Band band)
