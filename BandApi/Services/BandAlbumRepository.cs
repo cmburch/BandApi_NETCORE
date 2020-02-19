@@ -111,6 +111,15 @@ namespace BandApi.Services
                 .OrderBy(b => b.Name).ToList();
         }
 
+        public IEnumerable<Band> GetBands(string mainGenre)
+        {
+            if (string.IsNullOrWhiteSpace(mainGenre))
+                return GetBands(); //get all the bands if the genre is null or whitespace
+            //esle there is a genre
+            mainGenre = mainGenre.Trim(); 
+            return _context.Bands.Where(a => a.MainGenre == mainGenre).ToList();
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0); // SaveChanges return an integer of save records and -1 if save failed
