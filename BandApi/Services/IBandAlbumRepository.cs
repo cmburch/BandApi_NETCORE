@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BandApi.Entities;
+using BandApi.Helpers;
 
 namespace BandApi.Services
 {
@@ -25,7 +26,7 @@ namespace BandApi.Services
 
         IEnumerable<Band> GetBands(IEnumerable<Guid> bandIds);
 
-        IEnumerable<Band> GetBands(string mainGenre, string searchQuery);
+        IEnumerable<Band> GetBands(BandsResourceParameters bandsResourceParameters);
 
         void AddBand(Band band);
 
