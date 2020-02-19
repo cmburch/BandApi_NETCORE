@@ -25,7 +25,7 @@ namespace BandApi.Services
 
         IEnumerable<Band> GetBands(IEnumerable<Guid> bandIds);
 
-        IEnumerable<Band> GetBands(string mainGenre);
+        IEnumerable<Band> GetBands(string mainGenre, string searchQuery);
 
         void AddBand(Band band);
 
