@@ -34,5 +34,19 @@ namespace BandApi.Controllers
             return Ok(_mapper.Map<IEnumerable<AlbumsDto>>(albumsFromRepo));
         }
 
+        [HttpGet("{albumId}")]
+        public ActionResult<AlbumsDto> GetAlbumForBand(Guid bandId, Guid albumId)
+        {
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
+
+            var albumFromRepo = _bandAlbumRepository.GetAlbum(bandId, albumId);
+
+            if (albumFromRepo == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<AlbumsDto>(albumFromRepo));
+        }
+
     }
 }
