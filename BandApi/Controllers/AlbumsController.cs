@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using AutoMapper;
+using BandApi.Models;
 using BandApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +23,16 @@ namespace BandApi.Controllers
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<AlbumsDto>> GetAlbumsForBand(Guid bandId)
+        {
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
+
+            var albumsFromRepo = _bandAlbumRepository.GetAlbums(bandId);
+            return Ok(_mapper.Map<IEnumerable<AlbumsDto>>(albumsFromRepo));
+        }
+
     }
 }
