@@ -13,6 +13,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.19" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -22,8 +24,12 @@
     <Folder Include="Models\" />
     <Folder Include="Helpers\" />
     <Folder Include="Profiles\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="Migrations\20200218013036_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200218013036_Initial.cs" />
+    <Compile Remove="Migrations\BandAlbumContextModelSnapshot.cs" />
   </ItemGroup>
 </Project>

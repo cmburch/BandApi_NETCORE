@@ -41,7 +41,8 @@ namespace BandApi
             services.AddDbContext<BandAlbumContext>(options =>
             {
                 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                options.UseSqlServer(Configuration.GetConnectionString("Default-new"));
+                //options.UseSqlServer(Configuration.GetConnectionString("Default-new"));
+                options.UseMySql(Configuration.GetConnectionString("mysql1"), options => options.EnableRetryOnFailure());
 
             });
         }

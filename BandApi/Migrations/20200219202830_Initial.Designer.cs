@@ -3,14 +3,16 @@ using System;
 using BandApi.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BandApi.Migrations
 {
     [DbContext(typeof(BandAlbumContext))]
-    partial class BandAlbumContextModelSnapshot : ModelSnapshot
+    [Migration("20200219202830_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
