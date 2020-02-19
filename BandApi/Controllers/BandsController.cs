@@ -4,6 +4,7 @@ using BandApi.Models;
 using BandApi.Services;
 using BandApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace BandApi.Controllers
 {
@@ -12,31 +13,23 @@ namespace BandApi.Controllers
     public class BandsController : ControllerBase
     {
         private readonly IBandAlbumRepository _bandAlbumRepository;
+        private readonly IMapper _mapper;
 
-        public BandsController(IBandAlbumRepository bandAlbumRepository)
+        public BandsController(IBandAlbumRepository bandAlbumRepository, IMapper mapper)
         {
             _bandAlbumRepository = bandAlbumRepository ??
                 throw new ArgumentNullException(nameof(bandAlbumRepository));
+
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<BandDto>> GetBands()
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands();
-            var bandsDto = new List<BandDto>();
 
-            foreach (var band in bandsFromRepo)
-            {
-                bandsDto.Add(new BandDto()
-                {
-                    Id = band.Id,
-                    Name = band.Name,
-                    MainGenre = band.MainGenre,
-                    FoundedYearsAgo = $"{ band.Founded.ToString("yyyy") } ({ band.Founded.GetYearsAgo() } years ago)"
-
-                });
-            }
-            return Ok(bandsDto);
+            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandsFromRepo));
         }
 
         [HttpGet("{bandId}")]
