@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-
+using BandApi.Models;
 
 namespace BandApi.Profiles
 {
@@ -9,6 +9,8 @@ namespace BandApi.Profiles
         public AlbumsProfile()
         {
             CreateMap<Entities.Album, Models.AlbumsDto>().ReverseMap();
+
+            CreateMap<AlbumForCreatingDto, Entities.Album>();
         }
     }
 }

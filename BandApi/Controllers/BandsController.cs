@@ -24,7 +24,7 @@ namespace BandApi.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet]
+        [HttpGet("{albumId}",Name = "GetAlbumForBand")]
         public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery]BandsResourceParameters bandsResourceParameters)
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands(bandsResourceParameters);
@@ -47,12 +47,13 @@ namespace BandApi.Controllers
         public ActionResult<BandDto> CreateBand([FromBody] BandForCreatingDto band)
         {
             var bandEntity = _mapper.Map<Entities.Band>(band); //map to a object the database understands
-            _bandAlbumRepository.AddBand(bandEntity);
+            _bandAlbumRepository.AddBand(bandEntity); //currently the id property is 00000 and once the entity is added to the context then it gets a GUID Id
             _bandAlbumRepository.Save();
 
             var bandToReturn = _mapper.Map<BandDto>(bandEntity);
 
-            return CreatedAtRoute("GetBand", new { bandId = bandToReturn.Id }, bandToReturn);
+            return CreatedAtRoute("GetBand", new { bandId = bandToReturn.Id }, bandToReturn); //Header Location →https://localhost:5001/api/bands/08d7b5bc-cb24-422d-821b-a3d10226036e
         }
+
     }
 }
