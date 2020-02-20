@@ -24,7 +24,7 @@ namespace BandApi.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet("{albumId}",Name = "GetAlbumForBand")]
+        [HttpGet(Name = "GetAlbumForBand")]
         public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery]BandsResourceParameters bandsResourceParameters)
         {
             var bandsFromRepo = _bandAlbumRepository.GetBands(bandsResourceParameters);
