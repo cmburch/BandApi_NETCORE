@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace BandApi.Models
 {
     public class BandForCreatingDto
@@ -8,5 +10,7 @@ namespace BandApi.Models
         public DateTime Founded { get; set; }
 
         public string MainGenre { get; set; }
+
+        public ICollection<AlbumForCreatingDto> Albums { get; set; } = new List<AlbumForCreatingDto>();
     }
 }
