@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using BandApi.ValidationAttributes;
 
 namespace BandApi.Models
 {
-    public class AlbumForCreatingDto : IValidatableObject
+    [TitleAndDescriptionAttribute]
+    public class AlbumForCreatingDto 
     {
         [Required]
         [MaxLength(200)]
@@ -13,12 +15,5 @@ namespace BandApi.Models
         [MaxLength(400)]
         public string Description { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Title == Description)
-            {
-                yield return new ValidationResult("Title Must Be Different From Description", new[] { "AlbumForCreatingDto" });
-            }
-        }
     }
 }

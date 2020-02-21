@@ -25,6 +25,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Profiles\" />
     <Folder Include="Migrations\" />
+    <Folder Include="ValidationAttributes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\WeatherForecastController.cs" />
