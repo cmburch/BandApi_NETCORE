@@ -5,7 +5,7 @@ using BandApi.ValidationAttributes;
 
 namespace BandApi.Models
 {
-    [TitleAndDescriptionAttribute]
+    [TitleAndDescription]
     public class AlbumForCreatingDto 
     {
         [Required]

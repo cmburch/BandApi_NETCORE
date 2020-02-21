@@ -65,5 +65,25 @@ namespace BandApi.Controllers
                 new { bandId = bandId, albumId = albumToReturn.Id }, albumToReturn); //return a location header and 201 created response
         }
 
+
+        [HttpPut("{albumId}")]
+        public ActionResult UpdateAlbumForBand(Guid bandId, Guid albumId,[FromBody] AlbumForUpdatingDto album)
+        {
+            if (!_bandAlbumRepository.BandExists(bandId))
+                return NotFound();
+
+            var albumFromRepo = _bandAlbumRepository.GetAlbum(bandId, albumId);
+            if (albumFromRepo == null)
+                return NotFound();
+
+            //pass the album values to albumFromRepo this is the object in the DBcontext
+            //albumFromRepo is updated and its in a modified state inside of the Dbcontext
+            _mapper.Map(album, albumFromRepo); //the context is update here
+            //_bandAlbumRepository.UpdateAlbum(albumFromRepo); //not implemented in repository
+            _bandAlbumRepository.Save();
+
+            return NoContent();
+        }
+        
     }
 }
