@@ -8,11 +8,11 @@ namespace BandApi.ValidationAttributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var album = (AlbumForCreatingDto)validationContext.ObjectInstance;
+            var album = (AlbumManipulationDto)validationContext.ObjectInstance;
 
             if (album.Title == album.Description)
             {
-                return new ValidationResult("The title and the description need to be different", new[] { "AAlbumManipulationDto" });
+                return new ValidationResult("The title and the description need to be different", new[] { "AlbumManipulationDto" });
             }
 
             return ValidationResult.Success;
